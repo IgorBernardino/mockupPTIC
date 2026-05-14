@@ -208,6 +208,54 @@
   }
 
   /* ============ MOBILE PHONE ============ */
+  /* === ESTILOS DE INTERATIVIDADE === */
+  [data-goto], [data-action], .tb, .ph, .stand-row, .vip-pill, .conc-card {
+    cursor: pointer;
+  }
+  [data-goto]:hover, .tb:hover {
+    filter: brightness(1.15);
+    transition: filter 0.2s;
+  }
+  .tb.active {
+    color: var(--ouro) !important;
+  }
+  .pill.active {
+    background: var(--ouro) !important;
+    color: #1a1000 !important;
+    border-color: var(--ouro) !important;
+  }
+  /* Transição suave entre telas */
+  .scrn {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .scrn.transitioning {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  /* Toast de feedback */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: linear-gradient(135deg, var(--ouro), var(--ouro-2));
+    color: #1a1000;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    box-shadow: 0 10px 30px rgba(253,185,39,0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 10000;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
   .phone{
     width:340px;
     height:720px;
@@ -1199,10 +1247,7 @@
       <p>Protótipo de média/alta fidelidade do app oficial do evento — 8 telas principais, paleta Lakers, mobile-first.</p>
     </div>
     <div class="file-info">
-      <div><span class="dot"></span>Igor · turma 1DS3</div>
-      <div style="margin-top:4px">cyber-soul-app · main · auto-saved</div>
-      <div style="margin-top:4px">8 frames · iPhone 14 (390 × 844)</div>
-    </div>
+      <div><span class="dot"></span>Igor Bernardino, Lucas Henrique, Rikelmy Costa, Julia Guerino, Rafael · turma 1DS3</div>
   </div>
 
   <div class="canvas">
@@ -1217,7 +1262,7 @@
           <span>9:41</span>
           <span class="icons">●●●● 📶 100%</span>
         </div>
-        <div class="scrn">
+        <div class="scrn" data-screen="home">
           <div class="hero">
             <div class="hero-content">
               <div class="top">
@@ -1235,22 +1280,22 @@
           <div class="section">
             <div class="sec-title">Acesso rápido</div>
             <div class="quick-grid">
-              <div class="quick-card gold">
+              <div class="quick-card gold" data-goto="credenciamento">
                 <div class="ic">🎫</div>
                 <div class="ttl">Credenciar</div>
                 <div class="des">Cadastro rápido</div>
               </div>
-              <div class="quick-card">
+              <div class="quick-card" data-goto="concurso">
                 <div class="ic">🏆</div>
                 <div class="ttl">Concurso</div>
                 <div class="des">30 vagas · inscreva-se</div>
               </div>
-              <div class="quick-card">
+              <div class="quick-card" data-goto="mapa">
                 <div class="ic">🗺️</div>
                 <div class="ttl">Mapa</div>
                 <div class="des">Stands e palco</div>
               </div>
-              <div class="quick-card">
+              <div class="quick-card" data-goto="galeria">
                 <div class="ic">📸</div>
                 <div class="ttl">Galeria</div>
                 <div class="des">Curtir e votar</div>
@@ -1264,7 +1309,7 @@
               <div class="cd-item"><div class="cd-num">19</div><div class="cd-lbl">Seg</div></div>
             </div>
 
-            <div class="vip-banner">
+            <div class="vip-banner" data-goto="vips" style="cursor:pointer">
               <div class="vip-avs">
                 <div class="vip-av">GN</div>
                 <div class="vip-av">LS</div>
@@ -1284,16 +1329,13 @@
         </div>
 
         <div class="tab-bar">
-          <div class="tb active"><div class="i">⌂</div>Home</div>
-          <div class="tb"><div class="i">🗺</div>Mapa</div>
-          <div class="tb"><div class="i">📸</div>Galeria</div>
-          <div class="tb"><div class="i">⭐</div>VIPs</div>
-          <div class="tb"><div class="i">👤</div>Perfil</div>
+          <div class="tb active" data-goto="home"><div class="i">⌂</div>Home</div>
+          <div class="tb " data-goto="mapa"><div class="i">🗺</div>Mapa</div>
+          <div class="tb " data-goto="galeria"><div class="i">📸</div>Galeria</div>
+          <div class="tb " data-goto="vips"><div class="i">⭐</div>VIPs</div>
+          <div class="tb " data-goto="cospobre"><div class="i">🎭</div>Cospobre</div>
+          <div class="tb " data-goto="credenciamento"><div class="i">👤</div>Perfil</div>
         </div>
-      </div>
-      <div class="annotation">
-        <strong>Notas de design</strong>
-        Tela inicial com hierarquia clara: hero do evento → atalhos → contagem regressiva → destaque VIP → patrocinador. Tech-Solutions aparece sem ofuscar e Prefeitura como apoio institucional.
       </div>
     </div>
 
@@ -1306,9 +1348,9 @@
           <span>9:41</span>
           <span class="icons">●●●● 📶 100%</span>
         </div>
-        <div class="scrn">
+        <div class="scrn" data-screen="credenciamento">
           <div class="header-back">
-            <div class="back-ic">←</div>
+            <div class="back-ic" data-goto="home">←</div>
             <div class="ttl">Credenciamento</div>
             <div class="step">2 de 3</div>
           </div>
@@ -1389,13 +1431,18 @@
             </div>
           </div>
 
-          <div class="cta">CONTINUAR →</div>
+          <div class="cta" data-goto="concurso">CONTINUAR →</div>
           <div class="cta-hint">Ao continuar você aceita receber<br>newsletter Tech-Solutions ✦</div>
         </div>
-      </div>
-      <div class="annotation">
-        <strong>Decisão UX</strong>
-        Captura Marvel/DC de forma divertida (não invasiva). Tipo de participação direciona o fluxo: visitantes seguem direto, competidores vão para o concurso, expositores validam stand.
+
+        <div class="tab-bar">
+          <div class="tb" data-goto="home"><div class="i">⌂</div>Home</div>
+          <div class="tb" data-goto="mapa"><div class="i">🗺</div>Mapa</div>
+          <div class="tb" data-goto="galeria"><div class="i">📸</div>Galeria</div>
+          <div class="tb" data-goto="vips"><div class="i">⭐</div>VIPs</div>
+          <div class="tb" data-goto="cospobre"><div class="i">🎭</div>Cospobre</div>
+          <div class="tb active" data-goto="credenciamento"><div class="i">👤</div>Perfil</div>
+        </div>
       </div>
     </div>
 
@@ -1408,7 +1455,7 @@
           <span>9:41</span>
           <span class="icons">●●●● 📶 100%</span>
         </div>
-        <div class="scrn">
+        <div class="scrn" data-screen="concurso">
           <div class="banner-concurso">
             <div class="lb">★ Domingo · 16h</div>
             <div class="h">Concurso<br><span>Cosplay</span></div>
@@ -1419,7 +1466,7 @@
               <div class="l">Vagas restantes</div>
               <div class="v">07<small> / 30</small></div>
             </div>
-            <div class="cta" style="margin:0;padding:10px 18px;font-size:11px">INSCREVER</div>
+            <div class="cta" style="margin:0;padding:10px 18px;font-size:11px" data-goto="credenciamento">INSCREVER</div>
           </div>
 
           <div style="padding:14px 16px 0;font-size:11px;color:var(--ouro);font-weight:700;letter-spacing:.15em;text-transform:uppercase">Premiação</div>
@@ -1462,16 +1509,13 @@
         </div>
 
         <div class="tab-bar">
-          <div class="tb"><div class="i">⌂</div>Home</div>
-          <div class="tb"><div class="i">🗺</div>Mapa</div>
-          <div class="tb"><div class="i">📸</div>Galeria</div>
-          <div class="tb"><div class="i">⭐</div>VIPs</div>
-          <div class="tb"><div class="i">👤</div>Perfil</div>
+          <div class="tb " data-goto="home"><div class="i">⌂</div>Home</div>
+          <div class="tb " data-goto="mapa"><div class="i">🗺</div>Mapa</div>
+          <div class="tb " data-goto="galeria"><div class="i">📸</div>Galeria</div>
+          <div class="tb " data-goto="vips"><div class="i">⭐</div>VIPs</div>
+          <div class="tb " data-goto="cospobre"><div class="i">🎭</div>Cospobre</div>
+          <div class="tb " data-goto="credenciamento"><div class="i">👤</div>Perfil</div>
         </div>
-      </div>
-      <div class="annotation">
-        <strong>Engajamento</strong>
-        Contador de vagas em tempo real cria urgência (apenas 7/30). Critérios transparentes evitam reclamações. Restrições da Prefeitura ficam visíveis no rodapé.
       </div>
     </div>
 
@@ -1484,19 +1528,19 @@
           <span>9:41</span>
           <span class="icons">●●●● 📶 100%</span>
         </div>
-        <div class="scrn">
+        <div class="scrn" data-screen="mapa">
           <div class="map-head">
             <div class="h">Mapa <span>interativo</span></div>
             <div class="s">Toque em qualquer ponto para ver detalhes</div>
           </div>
 
           <div class="filter-pills">
-            <div class="pill active">Todos</div>
-            <div class="pill">Stands</div>
-            <div class="pill">Palco</div>
-            <div class="pill">VIP</div>
-            <div class="pill">Banheiros</div>
-            <div class="pill">Saídas</div>
+            <div class="pill active" data-action="filter">Todos</div>
+            <div class="pill" data-action="filter">Stands</div>
+            <div class="pill" data-action="filter">Palco</div>
+            <div class="pill" data-action="filter">VIP</div>
+            <div class="pill" data-action="filter">Banheiros</div>
+            <div class="pill" data-action="filter">Saídas</div>
           </div>
 
           <div class="map-canvas">
@@ -1594,16 +1638,13 @@
         </div>
 
         <div class="tab-bar">
-          <div class="tb"><div class="i">⌂</div>Home</div>
-          <div class="tb active"><div class="i">🗺</div>Mapa</div>
-          <div class="tb"><div class="i">📸</div>Galeria</div>
-          <div class="tb"><div class="i">⭐</div>VIPs</div>
-          <div class="tb"><div class="i">👤</div>Perfil</div>
+          <div class="tb " data-goto="home"><div class="i">⌂</div>Home</div>
+          <div class="tb active" data-goto="mapa"><div class="i">🗺</div>Mapa</div>
+          <div class="tb " data-goto="galeria"><div class="i">📸</div>Galeria</div>
+          <div class="tb " data-goto="vips"><div class="i">⭐</div>VIPs</div>
+          <div class="tb " data-goto="cospobre"><div class="i">🎭</div>Cospobre</div>
+          <div class="tb " data-goto="credenciamento"><div class="i">👤</div>Perfil</div>
         </div>
-      </div>
-      <div class="annotation">
-        <strong>Mapa interativo</strong>
-        Áreas tocáveis com filtros por categoria. Saídas de emergência (vermelho) sempre visíveis — exigência da Prefeitura. Ponto único de check-in destacado em ouro.
       </div>
     </div>
 
@@ -1616,7 +1657,7 @@
           <span>9:41</span>
           <span class="icons">●●●● 📶 100%</span>
         </div>
-        <div class="scrn">
+        <div class="scrn" data-screen="vips">
           <div class="map-head">
             <div class="h">Convidados <span>VIP</span></div>
             <div class="s">Sessões de fotos gratuitas no domingo</div>
@@ -1673,16 +1714,13 @@
         </div>
 
         <div class="tab-bar">
-          <div class="tb"><div class="i">⌂</div>Home</div>
-          <div class="tb"><div class="i">🗺</div>Mapa</div>
-          <div class="tb"><div class="i">📸</div>Galeria</div>
-          <div class="tb active"><div class="i">⭐</div>VIPs</div>
-          <div class="tb"><div class="i">👤</div>Perfil</div>
+          <div class="tb " data-goto="home"><div class="i">⌂</div>Home</div>
+          <div class="tb " data-goto="mapa"><div class="i">🗺</div>Mapa</div>
+          <div class="tb " data-goto="galeria"><div class="i">📸</div>Galeria</div>
+          <div class="tb active" data-goto="vips"><div class="i">⭐</div>VIPs</div>
+          <div class="tb " data-goto="cospobre"><div class="i">🎭</div>Cospobre</div>
+          <div class="tb " data-goto="credenciamento"><div class="i">👤</div>Perfil</div>
         </div>
-      </div>
-      <div class="annotation">
-        <strong>Influencers em foco</strong>
-        Cards individuais com bio, stats e CTA principal "Reservar foto". Cumpre a exigência de não esquecer Gamer-Nato e Luma-Star.
       </div>
     </div>
 
@@ -1695,7 +1733,7 @@
           <span>9:41</span>
           <span class="icons">●●●● 📶 100%</span>
         </div>
-        <div class="scrn">
+        <div class="scrn" data-screen="stands">
           <div class="map-head">
             <div class="h">Stands &amp; <span>Expositores</span></div>
             <div class="s">8 expositores confirmados</div>
@@ -1704,11 +1742,11 @@
           <div class="search-bar">Buscar stand ou produto...</div>
 
           <div class="cat-tabs">
-            <div class="pill active">Todos</div>
-            <div class="pill">Editoras</div>
-            <div class="pill">Lojas</div>
-            <div class="pill">Tech</div>
-            <div class="pill">Pelúcias</div>
+            <div class="pill active" data-action="filter">Todos</div>
+            <div class="pill" data-action="filter">Editoras</div>
+            <div class="pill" data-action="filter">Lojas</div>
+            <div class="pill" data-action="filter">Tech</div>
+            <div class="pill" data-action="filter">Pelúcias</div>
           </div>
 
           <div class="stand-row featured">
@@ -1783,17 +1821,15 @@
         </div>
 
         <div class="tab-bar">
-          <div class="tb"><div class="i">⌂</div>Home</div>
-          <div class="tb"><div class="i">🗺</div>Mapa</div>
-          <div class="tb"><div class="i">📸</div>Galeria</div>
-          <div class="tb"><div class="i">⭐</div>VIPs</div>
-          <div class="tb"><div class="i">👤</div>Perfil</div>
+          <div class="tb " data-goto="home"><div class="i">⌂</div>Home</div>
+          <div class="tb " data-goto="mapa"><div class="i">🗺</div>Mapa</div>
+          <div class="tb " data-goto="galeria"><div class="i">📸</div>Galeria</div>
+          <div class="tb " data-goto="vips"><div class="i">⭐</div>VIPs</div>
+          <div class="tb " data-goto="cospobre"><div class="i">🎭</div>Cospobre</div>
+          <div class="tb " data-goto="credenciamento"><div class="i">👤</div>Perfil</div>
         </div>
       </div>
       <div class="annotation">
-        <strong>Listagem completa</strong>
-        Forge-3D em destaque (stand maior, único com energia especial). Filtros por categoria + busca. Tamanho do stand visível ajuda visitante a planejar.
-      </div>
     </div>
 
     <!-- ============================== TELA 07 — GALERIA ============================== -->
@@ -1805,7 +1841,7 @@
           <span>9:41</span>
           <span class="icons">●●●● 📶 100%</span>
         </div>
-        <div class="scrn" style="position:relative">
+        <div class="scrn" data-screen="galeria" style="position:relative">
           <div class="map-head">
             <div class="h">Galeria <span>Pública</span></div>
             <div class="s">Curta os melhores · ranking ao vivo</div>
@@ -1818,11 +1854,11 @@
           </div>
 
           <div class="cat-tabs" style="padding-top:14px">
-            <div class="pill active">🔥 Top</div>
-            <div class="pill">📅 Hoje</div>
-            <div class="pill">🆕 Recentes</div>
-            <div class="pill">Cosplay sério</div>
-            <div class="pill">Cospobre</div>
+            <div class="pill active" data-action="filter">🔥 Top</div>
+            <div class="pill" data-action="filter">📅 Hoje</div>
+            <div class="pill" data-action="filter">🆕 Recentes</div>
+            <div class="pill" data-action="filter">Cosplay sério</div>
+            <div class="pill" data-action="filter">Cospobre</div>
           </div>
 
           <div class="photo-grid">
@@ -1879,16 +1915,13 @@
         </div>
 
         <div class="tab-bar">
-          <div class="tb"><div class="i">⌂</div>Home</div>
-          <div class="tb"><div class="i">🗺</div>Mapa</div>
-          <div class="tb active"><div class="i">📸</div>Galeria</div>
-          <div class="tb"><div class="i">⭐</div>VIPs</div>
-          <div class="tb"><div class="i">👤</div>Perfil</div>
+          <div class="tb " data-goto="home"><div class="i">⌂</div>Home</div>
+          <div class="tb " data-goto="mapa"><div class="i">🗺</div>Mapa</div>
+          <div class="tb active" data-goto="galeria"><div class="i">📸</div>Galeria</div>
+          <div class="tb " data-goto="vips"><div class="i">⭐</div>VIPs</div>
+          <div class="tb " data-goto="cospobre"><div class="i">🎭</div>Cospobre</div>
+          <div class="tb " data-goto="credenciamento"><div class="i">👤</div>Perfil</div>
         </div>
-      </div>
-      <div class="annotation">
-        <strong>Recurso de engajamento ★</strong>
-        Galeria com curtidas + ranking ao vivo gera competitividade saudável e mantém o público no app o tempo todo. Botão flutuante de upload incentiva participação.
       </div>
     </div>
 
@@ -1901,7 +1934,7 @@
           <span>9:41</span>
           <span class="icons">●●●● 📶 100%</span>
         </div>
-        <div class="scrn">
+        <div class="scrn" data-screen="cospobre">
           <div class="banner-cospobre">
             <div class="emoji-rain">🎭🎨📐✂️🎪</div>
             <div class="lb">★ Domingo · 17h30</div>
@@ -1910,7 +1943,7 @@
           </div>
 
           <div class="cospobre-cta">
-            <div class="cta-grande">
+            <div class="cta-grande" data-goto="credenciamento">
               <div class="cta-ic">🎭</div>
               <div>
                 <div class="cta-h">QUERO PARTICIPAR</div>
@@ -2002,53 +2035,148 @@
         </div>
 
         <div class="tab-bar">
-          <div class="tb"><div class="i">⌂</div>Home</div>
-          <div class="tb"><div class="i">🗺</div>Mapa</div>
-          <div class="tb active"><div class="i">🎭</div>Cospobre</div>
-          <div class="tb"><div class="i">⭐</div>VIPs</div>
-          <div class="tb"><div class="i">👤</div>Perfil</div>
+          <div class="tb " data-goto="home"><div class="i">⌂</div>Home</div>
+          <div class="tb " data-goto="mapa"><div class="i">🗺</div>Mapa</div>
+          <div class="tb " data-goto="galeria"><div class="i">📸</div>Galeria</div>
+          <div class="tb " data-goto="vips"><div class="i">⭐</div>VIPs</div>
+          <div class="tb active" data-goto="cospobre"><div class="i">🎭</div>Cospobre</div>
+          <div class="tb " data-goto="credenciamento"><div class="i">👤</div>Perfil</div>
         </div>
       </div>
-      <div class="annotation">
-        <strong>Tela exclusiva do Cospobre</strong>
-        Vibe debochada e festiva contrastando com o concurso sério. Inscrição na hora, critérios divertidos, Hospital de Cosplay em destaque e Hall da Fama com gambiarras lendárias.
-      </div>
     </div>
-
-  </div>
-
-  <!-- ============================== METADATA ============================== -->
-  <div class="meta-footer">
-    <h3>📋 Resumo do Protótipo</h3>
-    <div class="meta-grid">
-      <div class="it">
-        <strong>Patrocinador</strong>
-        Tech-Solutions aparece como rodapé fixo na home, financiando concurso e prêmios extras da galeria — presente sem ser invasivo.
-      </div>
-      <div class="it">
-        <strong>Influencers</strong>
-        Tela 05 dedicada a Gamer-Nato e Luma-Star com sessão "Reservar foto" — atende ao requisito de destaque.
-      </div>
-      <div class="it">
-        <strong>Prefeitura</strong>
-        Selo de "Apoio · Prefeitura Municipal" na home + restrições visíveis (sem armas, saídas de emergência sempre no mapa).
-      </div>
-      <div class="it">
-        <strong>Engajamento</strong>
-        Galeria com curtidas + ranking ao vivo + prêmios extras para Top 3. Botão flutuante de upload presente em todas as telas relevantes.
-      </div>
-      <div class="it">
-        <strong>Fluxo principal</strong>
-        Home → Credenciar → escolher tipo → (se competidor) Concurso → Mapa para se localizar → Galeria durante o evento.
-      </div>
-      <div class="it">
-        <strong>Identidade visual</strong>
-        Paleta Lakers (#552583 / #FDB927) sobre preto · tipografia serif Georgia para títulos · sans-serif para corpo · cards com bordas em ouro para destaques.
-      </div>
-    </div>
-  </div>
-
 </div>
 
+
+<script>
+(function(){
+  'use strict';
+  
+  // Toast de feedback
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  document.body.appendChild(toast);
+  
+  let toastTimer;
+  function showToast(msg) {
+    clearTimeout(toastTimer);
+    toast.textContent = msg;
+    toast.classList.add('show');
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+  }
+  
+  // Mapa de nomes amigáveis das telas
+  const screenNames = {
+    home: 'Home',
+    credenciamento: 'Credenciamento',
+    concurso: 'Concurso Cosplay',
+    mapa: 'Mapa do Ginásio',
+    vips: 'VIPs & Influencers',
+    stands: 'Lista de Stands',
+    galeria: 'Galeria',
+    cospobre: 'Desfile Cospobre'
+  };
+  
+  // Cache das views originais (clones)
+  const screenCache = {};
+  
+  // Indexar todas as views originais
+  document.querySelectorAll('.scrn[data-screen]').forEach(scrn => {
+    const name = scrn.getAttribute('data-screen');
+    if (!screenCache[name]) {
+      screenCache[name] = scrn.cloneNode(true);
+    }
+  });
+  
+  // Função: navegar dentro de um celular específico
+  function navigateInPhone(phoneEl, targetScreen) {
+    const currentScrn = phoneEl.querySelector('.scrn');
+    const currentScreen = currentScrn.getAttribute('data-screen');
+    
+    if (currentScreen === targetScreen) {
+      showToast('Você já está em ' + screenNames[targetScreen]);
+      return;
+    }
+    
+    if (!screenCache[targetScreen]) {
+      showToast('Tela não encontrada');
+      return;
+    }
+    
+    // Feedback visual: fade out
+    currentScrn.classList.add('transitioning');
+    
+    setTimeout(() => {
+      // Clonar a view destino do cache
+      const newScrn = screenCache[targetScreen].cloneNode(true);
+      
+      // Garantir que começa invisível
+      newScrn.classList.add('transitioning');
+      
+      // Substituir
+      currentScrn.replaceWith(newScrn);
+      
+      // Atualizar tab bar do PRÓPRIO celular para refletir a nova tela
+      updateTabBar(phoneEl, targetScreen);
+      
+      // Próximo frame: tirar a classe pra animar fade in
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          newScrn.classList.remove('transitioning');
+        });
+      });
+      
+      // Toast informativo
+      showToast('→ ' + screenNames[targetScreen]);
+    }, 300);
+  }
+  
+  // Atualizar qual ícone do tab bar fica ativo
+  function updateTabBar(phoneEl, currentScreen) {
+    const tabs = phoneEl.querySelectorAll('.tb');
+    tabs.forEach(tab => {
+      const goto = tab.getAttribute('data-goto');
+      if (goto === currentScreen) {
+        tab.classList.add('active');
+      } else {
+        tab.classList.remove('active');
+      }
+    });
+  }
+  
+  // === HANDLER PRINCIPAL ===
+  document.addEventListener('click', (e) => {
+    // Procurar o elemento clicável mais próximo
+    const clickable = e.target.closest('[data-goto], [data-action]');
+    if (!clickable) return;
+    
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Encontrar o celular pai
+    const phone = clickable.closest('.phone');
+    if (!phone) return;
+    
+    // Verificar tipo de ação
+    const action = clickable.getAttribute('data-action');
+    const goto = clickable.getAttribute('data-goto');
+    
+    if (action === 'filter') {
+      // Filtro: só alterna o ativo entre as pills do mesmo grupo
+      const siblings = clickable.parentElement.querySelectorAll('[data-action="filter"]');
+      siblings.forEach(s => s.classList.remove('active'));
+      clickable.classList.add('active');
+      showToast('Filtro: ' + clickable.textContent.trim());
+      return;
+    }
+    
+    if (goto) {
+      navigateInPhone(phone, goto);
+    }
+  });
+  
+  console.log('🎮 Cyber-Soul app: navegação interativa ativada');
+  console.log('Telas disponíveis:', Object.keys(screenCache));
+})();
+</script>
 </body>
 </html>
