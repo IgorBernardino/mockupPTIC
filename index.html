@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CosplayCon Brasil 2026 · Toda a cultura cosplay está aqui</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,34 +15,21 @@
 <nav class="navbar" id="navbar">
   <div class="nav-container">
     <div class="nav-logo" data-page="home">
-      <div class="icon-wrap">⚡</div>
-      <div class="brand">Cosplay<span>Con</span></div>
+      <div class="brand">
+        <div class="brand-pt">Cosplay<span>Con</span></div>
+        <div class="brand-jp">コスプレコン・2026</div>
+      </div>
     </div>
     <ul class="nav-menu" id="navMenu">
       <li><a class="nav-link active" data-page="home">Home</a></li>
 
-      <li class="nav-item-drop">
-        <a class="nav-link" data-page="ingressos">Tickets ▾</a>
-        <div class="dropdown">
-          <a class="drop-link" data-page="ingressos"><span class="drop-tag">EPIC</span>Ingressos</a>
-          <a class="drop-link" data-page="cadastro"><span class="drop-tag rare">FAST</span>Fast Pass</a>
-        </div>
-      </li>
+      <li><a class="nav-link" data-page="ingressos">Tickets</a></li>
 
       <li><a class="nav-link" data-page="mapa">Floor Map</a></li>
 
-      <li class="nav-item-drop">
-        <a class="nav-link" data-page="atracoes">VIP</a>
-      </li>
+      <li><a class="nav-link" data-page="atracoes">VIP</a></li>
 
-      <li class="nav-item-drop">
-        <a class="nav-link" data-page="concursos">Activities ▾</a>
-        <div class="dropdown wide">
-          <a class="drop-link" data-page="concursos"><span class="drop-ic">🏆</span>Concurso Cosplay</a>
-          <a class="drop-link" data-page="galeria"><span class="drop-ic">📸</span>Galeria & Ranking</a>
-          <a class="drop-link" data-page="atracoes"><span class="drop-ic">⭐</span>VIP</a>
-        </div>
-      </li>
+      <li><a class="nav-link" data-page="concursos">Concurso</a></li>
 
       <li><a class="nav-link" data-page="galeria">Galeria</a></li>
 
@@ -109,7 +99,7 @@
 
   <!-- =========================== SLIDER DESTAQUES (referência AnimeJapan) =========================== -->
   <div class="news-slider">
-    <div class="news-slider-track" id="newsTrack">
+    <div class="news-slider-track">
       <div class="news-slide active">
         <div class="news-content">
           <span class="news-tag">★ NEWS</span>
@@ -143,7 +133,7 @@
 
     <div class="news-controls">
       <button class="news-arrow prev" id="newsPrev">‹</button>
-      <div class="news-dots" id="newsDots">
+      <div class="news-dots">
         <span class="dot active"></span>
         <span class="dot"></span>
         <span class="dot"></span>
@@ -151,6 +141,8 @@
       <button class="news-arrow next" id="newsNext">›</button>
     </div>
   </div>
+
+
   <!-- Highlights -->
   <div class="section">
     <div class="section-container">
@@ -557,6 +549,69 @@
         <p class="section-subtitle">Os melhores cosplays da edição. Curta seus favoritos e ajude a definir o líder do dia.</p>
       </div>
 
+      <!-- Aftermovie / Vídeo do Evento -->
+      <div class="aftermovie-section">
+        <div class="aftermovie-header">
+          <span class="aftermovie-tag">★ AFTERMOVIE ★</span>
+          <h3 class="aftermovie-title">Vídeo do <span>Evento</span></h3>
+          <p class="aftermovie-sub">Reviva os melhores momentos da CosplayCon Brasil 2026</p>
+        </div>
+
+        <div class="aftermovie-player-wrap">
+          <video
+            class="aftermovie-video"
+            controls
+            preload="metadata"
+            poster="images/aftermovie-poster.jpg"
+            playsinline
+            onerror="this.style.display='none'; this.parentElement.classList.add('video-err');"
+          >
+            <source
+              src="videos/aftermovie.mp4"
+              type="video/mp4"
+              onerror="this.parentElement.style.display='none'; this.parentElement.parentElement.classList.add('video-err');"
+            >
+            Seu navegador não suporta vídeo HTML5.
+          </video>
+
+          <!-- Fallback estilizado quando o vídeo ainda não foi adicionado -->
+          <div class="aftermovie-fallback">
+            <div class="play-icon">
+              <svg viewBox="0 0 24 24" width="56" height="56" fill="currentColor">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+            <div class="fb-title">Aftermovie em produção</div>
+            <div class="fb-sub">O vídeo oficial do evento estará disponível em breve</div>
+            <div class="fb-tag">VIDEO_001 · REELS · 9:16</div>
+          </div>
+        </div>
+
+        <div class="aftermovie-meta">
+          <div class="meta-it">
+            <span class="meta-ic">🎬</span>
+            <div>
+              <div class="meta-lb">Duração</div>
+              <div class="meta-vl">~3 min</div>
+            </div>
+          </div>
+          <div class="meta-it">
+            <span class="meta-ic">📅</span>
+            <div>
+              <div class="meta-lb">Gravado em</div>
+              <div class="meta-vl">15 &amp; 16 Nov</div>
+            </div>
+          </div>
+          <div class="meta-it">
+            <span class="meta-ic">🎵</span>
+            <div>
+              <div class="meta-lb">Trilha</div>
+              <div class="meta-vl">Original</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="gallery-leader">
         <div class="photo"></div>
         <div class="info">
@@ -623,97 +678,21 @@
 
       <div class="mapa-section">
         <div class="mapa-svg-container">
-          <svg viewBox="0 0 400 480" style="width:100%; height:auto; display:block" xmlns="http://www.w3.org/2000/svg">
-            <!-- Contorno -->
-            <rect x="10" y="10" width="380" height="460" fill="#0a0a18" stroke="#00d4ff" stroke-width="2" rx="6"/>
-
-            <!-- Palco -->
-            <rect x="130" y="22" width="140" height="50" fill="#6c2bd9" stroke="#00d4ff" stroke-width="1.5" filter="url(#glow)"/>
-            <text x="200" y="52" fill="#00d4ff" font-size="13" font-weight="900" text-anchor="middle">PALCO</text>
-
-            <!-- VIP Lounge -->
-            <rect x="290" y="22" width="90" height="50" fill="#2a1056" stroke="#f0c674" stroke-width="1.5" stroke-dasharray="4,3"/>
-            <text x="335" y="46" fill="#f0c674" font-size="11" font-weight="700" text-anchor="middle">VIP</text>
-            <text x="335" y="60" fill="#f0c674" font-size="9" text-anchor="middle">LOUNGE</text>
-
-            <!-- Saídas emergência -->
-            <rect x="10" y="120" width="14" height="36" fill="#dc2626" stroke="#fff"/>
-            <text x="17" y="142" fill="#fff" font-size="8" text-anchor="middle" transform="rotate(-90 17 142)">SAÍDA</text>
-            <rect x="376" y="120" width="14" height="36" fill="#dc2626" stroke="#fff"/>
-            <text x="383" y="142" fill="#fff" font-size="8" text-anchor="middle" transform="rotate(90 383 142)">SAÍDA</text>
-
-            <!-- Stands fileira 1 -->
-            <rect x="50" y="115" width="55" height="55" fill="#1e3a8a" stroke="#3b82f6"/>
-            <text x="77" y="142" fill="#fff" font-size="9" text-anchor="middle">Shonen</text>
-            <text x="77" y="155" fill="#9ca3af" font-size="7" text-anchor="middle">3×3m</text>
-
-            <rect x="115" y="115" width="55" height="55" fill="#1e3a8a" stroke="#3b82f6"/>
-            <text x="142" y="142" fill="#fff" font-size="9" text-anchor="middle">Salem</text>
-            <text x="142" y="155" fill="#9ca3af" font-size="7" text-anchor="middle">3×3m</text>
-
-            <rect x="180" y="115" width="55" height="55" fill="#1e3a8a" stroke="#3b82f6"/>
-            <text x="207" y="139" fill="#fff" font-size="9" text-anchor="middle">Mangá+</text>
-            <text x="207" y="155" fill="#9ca3af" font-size="7" text-anchor="middle">3×3m</text>
-
-            <rect x="245" y="115" width="70" height="55" fill="#6c2bd9" stroke="#f0c674" stroke-width="2"/>
-            <text x="280" y="138" fill="#f0c674" font-size="9" font-weight="700" text-anchor="middle">Forge-3D</text>
-            <text x="280" y="153" fill="#f0c674" font-size="7" text-anchor="middle">5×5m ⚡</text>
-
-            <!-- Stands fileira 2 -->
-            <rect x="50" y="195" width="55" height="55" fill="#5c1f1f" stroke="#dc2626"/>
-            <text x="77" y="222" fill="#fff" font-size="9" text-anchor="middle">Akatsuki</text>
-            <text x="77" y="235" fill="#9ca3af" font-size="7" text-anchor="middle">3×3m</text>
-
-            <rect x="115" y="195" width="55" height="55" fill="#5c1f1f" stroke="#dc2626"/>
-            <text x="142" y="218" fill="#fff" font-size="9" text-anchor="middle">Dead</text>
-            <text x="142" y="232" fill="#fff" font-size="9" text-anchor="middle">Fênix</text>
-
-            <rect x="180" y="195" width="55" height="55" fill="#14532d" stroke="#22c55e"/>
-            <text x="207" y="218" fill="#fff" font-size="9" text-anchor="middle">Mundo</text>
-            <text x="207" y="232" fill="#fff" font-size="9" text-anchor="middle">Kawaii</text>
-
-            <!-- Energia -->
-            <circle cx="335" cy="200" r="8" fill="#f0c674" filter="url(#glow)"/>
-            <text x="335" y="204" fill="#0a0a18" font-size="9" font-weight="900" text-anchor="middle">P</text>
-
-            <!-- Colunas -->
-            <rect x="100" y="280" width="18" height="18" fill="#1f2937" stroke="#6b7184" stroke-dasharray="2,2"/>
-            <text x="109" y="291" fill="#6b7184" font-size="6" text-anchor="middle">CO</text>
-            <rect x="240" y="280" width="18" height="18" fill="#1f2937" stroke="#6b7184" stroke-dasharray="2,2"/>
-            <text x="249" y="291" fill="#6b7184" font-size="6" text-anchor="middle">CO</text>
-
-            <!-- Hospital -->
-            <rect x="50" y="320" width="65" height="38" fill="#3d1d0a" stroke="#dc2626"/>
-            <text x="82" y="338" fill="#dc2626" font-size="9" font-weight="900" text-anchor="middle">+ Hospital</text>
-            <text x="82" y="350" fill="#dc2626" font-size="8" text-anchor="middle">de Cosplay</text>
-
-            <!-- Banheiros -->
-            <rect x="50" y="385" width="65" height="38" fill="#1c1c2e" stroke="#6b7184"/>
-            <text x="82" y="408" fill="#fff" font-size="11" text-anchor="middle">WC ♂</text>
-            <rect x="280" y="385" width="65" height="38" fill="#1c1c2e" stroke="#6b7184"/>
-            <text x="312" y="408" fill="#fff" font-size="11" text-anchor="middle">WC ♀</text>
-
-            <!-- Check-in / Entrada -->
-            <rect x="140" y="430" width="120" height="30" fill="#00d4ff" stroke="#fff"/>
-            <text x="200" y="451" fill="#0a0a18" font-size="12" font-weight="900" text-anchor="middle">↑ CHECK-IN</text>
-
-            <!-- Extintores -->
-            <circle cx="22" cy="55" r="6" fill="#dc2626"/><text x="22" y="58" fill="#fff" font-size="7" font-weight="900" text-anchor="middle">X</text>
-            <circle cx="378" cy="55" r="6" fill="#dc2626"/><text x="378" y="58" fill="#fff" font-size="7" font-weight="900" text-anchor="middle">X</text>
-            <circle cx="22" cy="250" r="6" fill="#dc2626"/><text x="22" y="253" fill="#fff" font-size="7" font-weight="900" text-anchor="middle">X</text>
-            <circle cx="378" cy="250" r="6" fill="#dc2626"/><text x="378" y="253" fill="#fff" font-size="7" font-weight="900" text-anchor="middle">X</text>
-
-            <!-- Glow filter -->
-            <defs>
-              <filter id="glow">
-                <feGaussianBlur stdDeviation="2.5" result="blur"/>
-                <feMerge>
-                  <feMergeNode in="blur"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-            </defs>
-          </svg>
+          <div class="mapa-img-wrap">
+            <img
+              class="mapa-img"
+              src="images/mapa.jpg"
+              alt="Mapa do evento CosplayCon Brasil 2026 — Ginásio Municipal"
+              loading="lazy"
+              onerror="this.style.display='none'; this.parentElement.classList.add('img-err');"
+            >
+            <div class="mapa-img-fallback">
+              <div class="fb-ic">🗺️</div>
+              <div class="fb-title">Mapa em produção</div>
+              <div class="fb-sub">A planta final do evento será divulgada em breve</div>
+              <div class="fb-tag">MAP_001 · 800m²</div>
+            </div>
+          </div>
 
           <div class="mapa-legend">
             <div class="legend-it"><span class="sw" style="background:#6c2bd9; border:1px solid #00d4ff"></span> Palco / VIP</div>
@@ -722,6 +701,30 @@
             <div class="legend-it"><span class="sw" style="background:#dc2626"></span> Saída/Hospital</div>
             <div class="legend-it"><span class="sw" style="background:#f0c674; border-radius:50%"></span> Energia</div>
             <div class="legend-it"><span class="sw" style="background:#22c55e"></span> Pelúcias</div>
+          </div>
+
+          <!-- Como Chegar - Mapa de localização -->
+          <div class="como-chegar-section">
+            <div class="como-chegar-header">
+              <span class="como-chegar-tag">★ COMO CHEGAR ★</span>
+              <h3 class="como-chegar-title">Mapa de <span>Localização</span></h3>
+              <p class="como-chegar-sub">Encontre o caminho até o Ginásio Municipal</p>
+            </div>
+            <div class="como-chegar-img-wrap">
+              <img
+                class="como-chegar-img"
+                src="images/como-chegar.jpg"
+                alt="Mapa de localização e rota até o Ginásio Municipal"
+                loading="lazy"
+                onerror="this.style.display='none'; this.parentElement.classList.add('img-err');"
+              >
+              <div class="como-chegar-fallback">
+                <div class="fb-ic">📍</div>
+                <div class="fb-title">Mapa de rotas em produção</div>
+                <div class="fb-sub">Em breve disponibilizaremos a melhor rota até o evento</div>
+                <div class="fb-tag">ROUTE_001 · Ginásio Municipal</div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -872,12 +875,30 @@
             <label>Seu universo favorito *</label>
             <div class="form-mvdc" id="fUniverso">
               <div class="mvdc-card marvel" data-value="Marvel">
-                <div class="lg">MARVEL</div>
-                <div class="ds">Heróis & Vilões</div>
+                <img
+                  class="mvdc-img"
+                  src="images/marvel.png"
+                  alt="Marvel"
+                  loading="lazy"
+                  onerror="this.style.display='none'; this.parentElement.classList.add('img-err');"
+                >
+                <div class="mvdc-fallback">
+                  <div class="lg">MARVEL</div>
+                  <div class="ds">Heróis & Vilões</div>
+                </div>
               </div>
               <div class="mvdc-card dc" data-value="DC">
-                <div class="lg">DC</div>
-                <div class="ds">Universo DC</div>
+                <img
+                  class="mvdc-img"
+                  src="images/dc.png"
+                  alt="DC"
+                  loading="lazy"
+                  onerror="this.style.display='none'; this.parentElement.classList.add('img-err');"
+                >
+                <div class="mvdc-fallback">
+                  <div class="lg">DC</div>
+                  <div class="ds">Universo DC</div>
+                </div>
               </div>
             </div>
             <div class="form-error" data-for="fUniverso"></div>
@@ -933,7 +954,7 @@
     <div class="ticket-wrap">
       <button class="ticket-close" id="ticketClose" aria-label="Fechar">×</button>
 
-      <div class="ticket-card-result" id="ticketCard">
+      <div class="ticket-card-result">
         <!-- Borda decorativa -->
         <div class="ticket-corner tl"></div>
         <div class="ticket-corner tr"></div>
@@ -949,77 +970,14 @@
           </div>
           <div class="ticket-jp">登録完了</div>
           <div class="ticket-title-success">Cadastro realizado!</div>
-          <div class="ticket-sub">Seu ticket e convite estão prontos</div>
+          <div class="ticket-sub">Apresente o QR Code do convite na entrada</div>
         </div>
 
-        <!-- Tabs Ticket / Convite -->
-        <div class="ticket-tabs">
-          <button class="ticket-tab active" data-tab="ticket">
-            <span>🎫</span> Ticket
-          </button>
-          <button class="ticket-tab" data-tab="convite">
-            <span>💌</span> Convite
-          </button>
-        </div>
-
-        <!-- View: Ticket (padrão) -->
-        <div class="ticket-view active" data-view="ticket">
-          <div class="ticket-content">
-            <div class="ticket-info">
-              <div class="ticket-event-name">CosplayCon Brasil 2026</div>
-              <div class="ticket-event-tagline">コスプレのすべてが、ここにある</div>
-
-              <div class="ticket-rows">
-                <div class="ticket-row">
-                  <span class="ticket-lb">Nome</span>
-                  <span class="ticket-vl" id="rNome">—</span>
-                </div>
-                <div class="ticket-row">
-                  <span class="ticket-lb">E-mail</span>
-                  <span class="ticket-vl" id="rEmail">—</span>
-                </div>
-                <div class="ticket-row">
-                  <span class="ticket-lb">WhatsApp</span>
-                  <span class="ticket-vl" id="rTel">—</span>
-                </div>
-                <div class="ticket-row">
-                  <span class="ticket-lb">Instagram</span>
-                  <span class="ticket-vl" id="rIg">—</span>
-                </div>
-                <div class="ticket-row">
-                  <span class="ticket-lb">Universo</span>
-                  <span class="ticket-vl" id="rUniverso">—</span>
-                </div>
-                <div class="ticket-row highlight">
-                  <span class="ticket-lb">Categoria</span>
-                  <span class="ticket-vl" id="rTipo">—</span>
-                </div>
-              </div>
-
-              <div class="ticket-date">
-                <div class="ticket-date-day">15 &amp; 16 NOV</div>
-                <div class="ticket-date-place">Ginásio Municipal · Brasil</div>
-              </div>
-            </div>
-
-            <!-- Separador perfurado -->
-            <div class="ticket-perforated"></div>
-
-            <!-- QR Code -->
-            <div class="ticket-qr-area">
-              <div class="ticket-qr-label">★ Hunter ID ★</div>
-              <div class="ticket-qr" id="qrCode"></div>
-              <div class="ticket-qr-code" id="qrCodeId">CSP-0000-0000</div>
-              <div class="ticket-qr-note">Scan no check-in</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- View: Convite -->
-        <div class="ticket-view" data-view="convite">
+        <!-- Convite + Brindes (sem abas) -->
+        <div class="convite-section">
           <div class="convite-wrap">
             <!-- O convite tem formato 9:16 estilo story -->
-            <div class="convite-card" id="conviteCard">
+            <div class="convite-card">
               <!-- Imagem hero (será preenchida via JS de acordo com o tipo) -->
               <div class="convite-hero" id="conviteHero"></div>
               <div class="convite-hero-overlay"></div>
@@ -1063,11 +1021,33 @@
                   </div>
                 </div>
 
-                <div class="convite-footer">
+                <div class="convite-footer-card">
                   <span class="convite-tagline">コスプレのすべてが、ここにある</span>
                   <span class="convite-hashtag">#CosplayConBR2026</span>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <!-- Seção de Brindes -->
+          <div class="brindes-section">
+            <div class="brindes-header">
+              <div class="brindes-tag">★ MERCH BTS ★</div>
+              <h3 class="brindes-title">Seus brindes <span>inclusos</span></h3>
+              <p class="brindes-sub">Retire no balcão de credenciamento com seu Hunter ID</p>
+            </div>
+            <div class="brindes-img-wrap">
+              <img
+                class="brindes-img"
+                src="https://raw.githubusercontent.com/juliaguerino-hub/portfolio-assets/refs/heads/main/cosplaycon_merch_bts_ticket.svg"
+                alt="Brindes inclusos no kit CosplayCon Brasil 2026"
+                loading="lazy"
+                onerror="this.parentElement.classList.add('img-err'); this.style.display='none'; this.parentElement.insertAdjacentHTML('beforeend', '<div class=&quot;brindes-img-fallback&quot;><span>🎁</span><strong>Kit de Brindes</strong><small>Adesivos · Chaveiro · Patch · Ecobag</small></div>');"
+              >
+            </div>
+            <div class="brindes-note">
+              <span class="brindes-note-ic">📦</span>
+              <span>Kit oficial · disponível apenas durante o evento · entrega no credenciamento</span>
             </div>
           </div>
         </div>
@@ -1075,7 +1055,7 @@
         <!-- Footer (botões) -->
         <div class="ticket-footer">
           <button class="btn btn-secondary" id="ticketDownload">
-            ⬇ <span id="downloadLabel">Baixar Ticket</span>
+            ⬇ Baixar Convite
           </button>
           <button class="btn btn-primary" id="ticketDone">
             ✓ Concluir
@@ -1091,8 +1071,10 @@
   <div class="footer-container">
     <div class="footer-brand">
       <div class="nav-logo">
-        <div class="icon-wrap">⚡</div>
-        <div class="brand">Cosplay<span>Con</span></div>
+        <div class="brand">
+          <div class="brand-pt">Cosplay<span>Con</span></div>
+          <div class="brand-jp">コスプレコン・2026</div>
+        </div>
       </div>
       <p>O maior festival de cosplay do Brasil. Dois dias de pura imersão na cultura pop, anime e mangá, com concursos, VIPs internacionais e a melhor experiência cosplay do país.</p>
       <div class="footer-socials">

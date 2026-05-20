@@ -8,13 +8,11 @@
     /* PALETA SOLO LEVELING */
     --bg-deep: #050510;
     --bg-dark: #0a0a18;
-    --bg-mid:  #11112a;
     --bg-card: #0f0f20;
     --bg-elev: #15152e;
     --bg-glass: rgba(20, 20, 45, 0.55);
 
     --ciano:   #00d4ff;       /* sistema, glow primário */
-    --ciano-2: #4ee2ff;
     --azul:    #1e90ff;
     --roxo:    #6c2bd9;       /* magia, mana */
     --roxo-2:  #4c1d95;
@@ -105,32 +103,31 @@
     cursor: pointer;
     user-select: none;
   }
-  .nav-logo .icon-wrap{
-    width: 42px; height: 42px;
-    background: linear-gradient(135deg, var(--ciano), var(--roxo));
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px;
-    box-shadow: var(--glow-cy);
-    position: relative;
-  }
-  .nav-logo .icon-wrap::after{
-    content: "";
-    position: absolute;
-    inset: -2px;
-    border: 1px solid var(--ciano);
-    border-radius: 8px;
-    opacity: 0.5;
-  }
+  /* Logo Katakana Fusion: PT em cima + japonês embaixo */
   .nav-logo .brand{
-    font-family: 'Georgia', serif;
-    font-size: 22px;
+    display: flex;
+    flex-direction: column;
+    line-height: 0.95;
+  }
+  .nav-logo .brand-pt{
+    font-family: 'Bebas Neue', 'Helvetica Neue', Impact, sans-serif;
+    font-size: 24px;
     font-weight: 900;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     color: #fff;
+    text-transform: uppercase;
     text-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
   }
-  .nav-logo .brand span{ color: var(--ciano) }
+  .nav-logo .brand-pt span{ color: var(--ciano) }
+  .nav-logo .brand-jp{
+    font-family: 'Yu Gothic', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+    font-size: 9px;
+    color: var(--ciano);
+    letter-spacing: 0.35em;
+    margin-top: 4px;
+    opacity: 0.75;
+    font-weight: 600;
+  }
   .nav-menu{
     display: flex;
     align-items: center;
@@ -819,6 +816,183 @@
     font-weight: 700;
   }
 
+  /* ============ AFTERMOVIE / VÍDEO DO EVENTO ============ */
+  .aftermovie-section{
+    margin-bottom: 50px;
+  }
+  .aftermovie-header{
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .aftermovie-tag{
+    display: inline-block;
+    font-size: 10px;
+    color: var(--ciano);
+    letter-spacing: 0.35em;
+    font-weight: 800;
+    padding: 4px 12px;
+    border: 1px solid var(--ciano);
+    border-radius: 4px;
+    background: rgba(0, 212, 255, 0.05);
+    margin-bottom: 12px;
+  }
+  .aftermovie-title{
+    font-family: 'Georgia', serif;
+    font-size: 26px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    text-shadow: 0 0 14px rgba(0, 212, 255, 0.3);
+  }
+  .aftermovie-title span{
+    background: linear-gradient(135deg, var(--ciano), var(--roxo));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .aftermovie-sub{
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--texto-2);
+  }
+
+  /* Player wrapper - aspect 9:16 (Reels/Stories), centralizado */
+  .aftermovie-player-wrap{
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    aspect-ratio: 9 / 16;
+    margin: 0 auto;
+    background: #0a0a18;
+    border: 2px solid var(--ciano);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(0, 212, 255, 0.3),
+      0 0 40px rgba(0, 212, 255, 0.2),
+      0 20px 50px rgba(0, 0, 0, 0.6);
+  }
+  .aftermovie-video{
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: #000;
+    object-fit: contain;
+    position: relative;
+    z-index: 2;
+  }
+  /* Quando o vídeo falha em carregar, escondemos ele e o fallback fica visível */
+  .aftermovie-player-wrap.video-err .aftermovie-video{
+    display: none;
+  }
+  /* Fallback exibido quando o vídeo não está disponível */
+  .aftermovie-fallback{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 32px;
+    text-align: center;
+    pointer-events: none;
+    z-index: 1;
+    background:
+      repeating-linear-gradient(
+        45deg,
+        transparent 0 30px,
+        rgba(0, 212, 255, 0.03) 30px 31px
+      ),
+      radial-gradient(ellipse at center, rgba(108, 43, 217, 0.2), transparent 70%);
+  }
+  .aftermovie-fallback .play-icon{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--ciano), var(--roxo));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    box-shadow:
+      0 0 30px rgba(0, 212, 255, 0.5),
+      0 0 60px rgba(108, 43, 217, 0.3);
+    padding-left: 6px;
+    animation: pulseGlow 2.5s ease-in-out infinite;
+  }
+  @keyframes pulseGlow{
+    0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(0, 212, 255, 0.5), 0 0 60px rgba(108, 43, 217, 0.3) }
+    50% { transform: scale(1.05); box-shadow: 0 0 40px rgba(0, 212, 255, 0.7), 0 0 80px rgba(108, 43, 217, 0.5) }
+  }
+  .aftermovie-fallback .fb-title{
+    font-family: 'Georgia', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--ciano);
+    text-shadow: 0 0 14px rgba(0, 212, 255, 0.4);
+  }
+  .aftermovie-fallback .fb-sub{
+    font-size: 13px;
+    color: var(--texto-2);
+    max-width: 360px;
+    line-height: 1.5;
+  }
+  .aftermovie-fallback .fb-tag{
+    margin-top: 4px;
+    font-family: monospace;
+    font-size: 10px;
+    color: var(--ouro);
+    letter-spacing: 0.3em;
+    padding: 4px 10px;
+    border: 1px solid var(--ouro);
+    border-radius: 3px;
+    opacity: 0.7;
+  }
+
+  /* Meta info (duração, data, trilha) */
+  .aftermovie-meta{
+    max-width: 900px;
+    margin: 18px auto 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .aftermovie-meta .meta-it{
+    background: var(--bg-card);
+    border: 1px solid var(--linha);
+    border-radius: 10px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .aftermovie-meta .meta-ic{
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .aftermovie-meta .meta-lb{
+    font-size: 10px;
+    color: var(--suave);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .aftermovie-meta .meta-vl{
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    margin-top: 2px;
+  }
+  @media (max-width: 768px) {
+    .aftermovie-title { font-size: 22px }
+    .aftermovie-meta { grid-template-columns: 1fr; gap: 10px }
+    .aftermovie-fallback .play-icon { width: 64px; height: 64px }
+    .aftermovie-fallback .play-icon svg { width: 36px; height: 36px }
+    .aftermovie-fallback .fb-title { font-size: 18px }
+    .aftermovie-fallback .fb-sub { font-size: 12px }
+  }
+
   /* ============ GALERIA ============ */
   .gallery-leader{
     background: linear-gradient(135deg, rgba(108, 43, 217, 0.25), rgba(0, 212, 255, 0.15));
@@ -986,6 +1160,85 @@
     color: var(--ciano);
     letter-spacing: 0.2em;
     opacity: 0.5;
+    z-index: 2;
+  }
+
+  /* Wrapper da imagem do mapa — mantém aspect-ratio 5:6 (igual ao SVG antigo 400x480) */
+  .mapa-img-wrap{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 5 / 6;
+    background: #0a0a18;
+    border: 2px solid var(--ciano);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 0 24px rgba(0, 212, 255, 0.15) inset, 0 0 12px rgba(0, 212, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mapa-img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  /* Fallback (aparece se a imagem não carregar OU enquanto não tem imagem) */
+  .mapa-img-fallback{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 24px;
+    text-align: center;
+    pointer-events: none;
+    background:
+      repeating-linear-gradient(
+        45deg,
+        transparent 0 24px,
+        rgba(0, 212, 255, 0.03) 24px 25px
+      ),
+      radial-gradient(ellipse at center, rgba(108, 43, 217, 0.15), transparent 70%);
+  }
+  .mapa-img-fallback .fb-ic{
+    font-size: 56px;
+    opacity: 0.5;
+    filter: drop-shadow(0 0 18px rgba(0, 212, 255, 0.4));
+  }
+  .mapa-img-fallback .fb-title{
+    font-family: 'Georgia', serif;
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--ciano);
+    text-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
+  }
+  .mapa-img-fallback .fb-sub{
+    font-size: 12px;
+    color: var(--texto-2);
+    max-width: 240px;
+    line-height: 1.5;
+  }
+  .mapa-img-fallback .fb-tag{
+    margin-top: 6px;
+    font-family: monospace;
+    font-size: 10px;
+    color: var(--ouro);
+    letter-spacing: 0.3em;
+    padding: 4px 10px;
+    border: 1px solid var(--ouro);
+    border-radius: 3px;
+    opacity: 0.7;
+  }
+  /* Quando img carrega ok, escondemos o fallback de baixo dela */
+  .mapa-img-wrap:has(img:not([style*="display: none"])) .mapa-img-fallback{
+    display: none;
+  }
+  /* No estado de erro o img-wrap recebe a classe img-err via onerror */
+  .mapa-img-wrap.img-err .mapa-img-fallback{
+    display: flex;
   }
   .mapa-legend{
     display: grid;
@@ -1014,6 +1267,124 @@
     gap: 18px;
     transition: all 0.2s;
     cursor: pointer;
+  }
+
+  /* ============ COMO CHEGAR (mapa de rota abaixo da legenda) ============ */
+  .como-chegar-section{
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px dashed var(--linha);
+  }
+  .como-chegar-header{
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .como-chegar-tag{
+    display: inline-block;
+    font-size: 10px;
+    color: var(--ciano);
+    letter-spacing: 0.35em;
+    font-weight: 800;
+    padding: 4px 12px;
+    border: 1px solid var(--ciano);
+    border-radius: 4px;
+    background: rgba(0, 212, 255, 0.05);
+    margin-bottom: 12px;
+  }
+  .como-chegar-title{
+    font-family: 'Georgia', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    text-shadow: 0 0 12px rgba(0, 212, 255, 0.3);
+  }
+  .como-chegar-title span{
+    background: linear-gradient(135deg, var(--ciano), var(--azul));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .como-chegar-sub{
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--texto-2);
+  }
+  /* Wrapper da imagem — aspect ratio 16:9 (típico de mapa de rota) */
+  .como-chegar-img-wrap{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #0a0a18;
+    border: 2px solid var(--ciano);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 24px rgba(0, 212, 255, 0.15) inset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .como-chegar-img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  /* Fallback bonito (mesmo padrão do mapa principal) */
+  .como-chegar-fallback{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    text-align: center;
+    pointer-events: none;
+    background:
+      repeating-linear-gradient(
+        -45deg,
+        transparent 0 24px,
+        rgba(0, 212, 255, 0.03) 24px 25px
+      ),
+      radial-gradient(ellipse at center, rgba(108, 43, 217, 0.12), transparent 70%);
+  }
+  .como-chegar-fallback .fb-ic{
+    font-size: 48px;
+    opacity: 0.6;
+    filter: drop-shadow(0 0 16px rgba(0, 212, 255, 0.4));
+  }
+  .como-chegar-fallback .fb-title{
+    font-family: 'Georgia', serif;
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--ciano);
+    text-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
+  }
+  .como-chegar-fallback .fb-sub{
+    font-size: 11px;
+    color: var(--texto-2);
+    max-width: 280px;
+    line-height: 1.5;
+  }
+  .como-chegar-fallback .fb-tag{
+    margin-top: 4px;
+    font-family: monospace;
+    font-size: 9px;
+    color: var(--ouro);
+    letter-spacing: 0.3em;
+    padding: 3px 8px;
+    border: 1px solid var(--ouro);
+    border-radius: 3px;
+    opacity: 0.7;
+  }
+  /* Lógica show/hide do fallback */
+  .como-chegar-img-wrap:has(img:not([style*="display: none"])) .como-chegar-fallback{
+    display: none;
+  }
+  .como-chegar-img-wrap.img-err .como-chegar-fallback{
+    display: flex;
   }
   .stands-list-container .stand-item:hover{
     border-color: var(--ciano);
@@ -1145,13 +1516,21 @@
     margin-top: 8px;
   }
   .mvdc-card{
-    padding: 24px 16px;
+    padding: 18px 16px;
     background: var(--bg-deep);
     border: 2px solid var(--linha);
     border-radius: 12px;
     text-align: center;
     cursor: pointer;
     transition: all 0.2s;
+    /* Mínimo de altura pra ficar igual entre marvel/dc, com ou sem imagem */
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
   }
   .mvdc-card:hover{ border-color: var(--ciano) }
   .mvdc-card.selected{
@@ -1159,15 +1538,40 @@
     background: rgba(0, 212, 255, 0.05);
     box-shadow: var(--glow-cy);
   }
-  .mvdc-card .lg{
+  /* Imagem real do logo (Marvel/DC) — preenche o card mantendo proporção */
+  .mvdc-img{
+    max-width: 100%;
+    max-height: 80px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+    transition: transform 0.2s;
+  }
+  .mvdc-card:hover .mvdc-img{
+    transform: scale(1.05);
+  }
+  /* Fallback de texto (mostrado se a imagem ainda não estiver no projeto) */
+  .mvdc-fallback{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  /* Se imagem falhar, esconde img e mostra fallback */
+  .mvdc-card.img-err .mvdc-img{ display: none }
+  .mvdc-card.img-err .mvdc-fallback{ display: flex }
+  /* Estilos do fallback (igual ao antigo, só ativados se for usado) */
+  .mvdc-fallback .lg{
     font-family: 'Georgia', serif;
     font-size: 28px;
     font-weight: 900;
     letter-spacing: -0.02em;
   }
-  .mvdc-card.marvel .lg{ color: #e62429 }
-  .mvdc-card.dc .lg{ color: #0476f2 }
-  .mvdc-card .ds{
+  .mvdc-card.marvel .mvdc-fallback .lg{ color: #e62429 }
+  .mvdc-card.dc .mvdc-fallback .lg{ color: #0476f2 }
+  .mvdc-fallback .ds{
     font-size: 10px;
     color: var(--suave);
     letter-spacing: 0.2em;
@@ -1175,7 +1579,7 @@
     margin-top: 6px;
     font-weight: 600;
   }
-  .mvdc-card.selected .ds{ color: var(--ciano) }
+  .mvdc-card.selected .mvdc-fallback .ds{ color: var(--ciano) }
 
   .form-tipos{ margin-top: 8px }
   .tipo-row{
@@ -1360,118 +1764,6 @@
      ESTILOS DOS NOVOS COMPONENTES (AnimeJapan style)
   ============================================ */
 
-  /* ============ MEGAMENU / DROPDOWNS ============ */
-  .nav-item-drop {
-    position: relative;
-    list-style: none;
-  }
-  .nav-item-drop > .nav-link {
-    display: inline-block;
-  }
-  .dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    min-width: 240px;
-    background: var(--bg-dark);
-    border: 1px solid var(--linha);
-    border-radius: 10px;
-    padding: 8px;
-    margin-top: 12px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-8px);
-    transition: all 0.25s;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), var(--glow-cy);
-    z-index: 200;
-  }
-  .dropdown.wide {
-    min-width: 280px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4px;
-  }
-  .nav-item-drop:hover .dropdown {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-  .drop-link {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 11px 14px;
-    border-radius: 6px;
-    color: var(--texto-2);
-    font-size: 13px;
-    font-weight: 600;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.15s;
-    letter-spacing: 0.05em;
-  }
-  .drop-link:hover {
-    background: rgba(0, 212, 255, 0.08);
-    color: var(--ciano);
-    transform: translateX(4px);
-  }
-  .drop-tag {
-    background: var(--ciano);
-    color: var(--bg-deep);
-    padding: 2px 7px;
-    border-radius: 3px;
-    font-size: 9px;
-    font-weight: 900;
-    letter-spacing: 0.15em;
-  }
-  .drop-tag.rare {
-    background: linear-gradient(135deg, var(--ouro), #c89412);
-  }
-  .drop-tag.legend {
-    background: linear-gradient(135deg, var(--roxo), var(--roxo-2));
-    color: #fff;
-  }
-  .drop-ic {
-    font-size: 16px;
-    width: 24px;
-    text-align: center;
-  }
-
-  /* Stage colors (referência AnimeJapan: Red/Blue/Green/White stages) */
-  .stage-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    box-shadow: 0 0 8px currentColor;
-  }
-  .stage-dot.red { background: #ff4d4d; color: #ff4d4d; }
-  .stage-dot.blue { background: var(--ciano); color: var(--ciano); }
-  .stage-dot.green { background: var(--verde); color: var(--verde); }
-  .stage-dot.white { background: #fff; color: #fff; }
-
-  /* Language switcher */
-  .nav-lang {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    margin-left: 16px;
-    padding-left: 16px;
-    border-left: 1px solid var(--linha);
-  }
-  .lang-link {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--suave);
-    padding: 6px 8px;
-    cursor: pointer;
-    transition: color 0.2s;
-    letter-spacing: 0.1em;
-  }
-  .lang-link:hover, .lang-link.active {
-    color: var(--ciano);
-  }
-
   /* ============ TAGLINE JAPONÊS NO HERO ============ */
   .hero-tagline-jp {
     font-family: 'Yu Gothic', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
@@ -1638,7 +1930,7 @@
     box-shadow: var(--glow-cy);
     transform: scale(1.3);
   }
-  
+
   /* ============ TIERS DE PATROCINADORES ============ */
   .sponsors-tiers {
     max-width: 1400px;
@@ -1741,27 +2033,11 @@
 
   /* ============ AJUSTES RESPONSIVOS DOS NOVOS COMPONENTES ============ */
   @media (max-width: 968px) {
-    .dropdown {
-      position: static;
-      opacity: 1;
-      visibility: visible;
-      transform: none;
-      box-shadow: none;
-      border: 0;
-      background: transparent;
-      padding: 6px 12px;
-      margin-top: 0;
-    }
-    .dropdown.wide { grid-template-columns: 1fr }
-    .nav-lang { margin-left: 0; padding-left: 0; border: 0; margin-top: 12px }
     .news-slide { grid-template-columns: 1fr }
     .news-img { min-height: 200px; order: -1 }
     .news-content { padding: 30px 24px }
     .news-content h3 { font-size: 22px }
     .hero-tagline-jp { font-size: 14px; letter-spacing: 0.2em }
-    .pickup-grid { grid-template-columns: repeat(2, 1fr); gap: 12px }
-    .pickup-card { padding: 24px 14px }
-    .pickup-ic { font-size: 36px }
     .sponsor-logo.big { font-size: 18px; padding: 14px 28px }
   }
 
@@ -1806,7 +2082,7 @@
     display: none;
     align-items: center;
     justify-content: center;
-    padding: 24px;
+    padding: 20px;
     overflow-y: auto;
   }
   .ticket-modal.show {
@@ -1825,27 +2101,27 @@
   }
   .ticket-wrap {
     position: relative;
-    max-width: 900px;
+    max-width: 560px;
     width: 100%;
     margin: auto;
     z-index: 10001;
     animation: ticketIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
   @keyframes ticketIn {
-    from { transform: scale(0.85) translateY(40px); opacity: 0 }
+    from { transform: scale(0.9) translateY(30px); opacity: 0 }
     to { transform: scale(1) translateY(0); opacity: 1 }
   }
   .ticket-close {
     position: absolute;
-    top: 14px;
-    right: 14px;
-    width: 38px;
-    height: 38px;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     background: rgba(5, 5, 16, 0.85);
     border: 1px solid var(--ciano);
     color: var(--ciano);
-    font-size: 22px;
+    font-size: 18px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -1864,46 +2140,56 @@
   .ticket-card-result {
     background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-dark) 100%);
     border: 2px solid var(--ciano);
-    border-radius: 20px;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: var(--glow-cy-strong), 0 30px 80px rgba(0, 0, 0, 0.8);
+    box-shadow: var(--glow-cy-strong), 0 20px 50px rgba(0, 0, 0, 0.8);
     position: relative;
+    max-height: calc(100vh - 40px);
+    display: flex;
+    flex-direction: column;
   }
+  /* Os filhos do card formam um flex column com 1 área scrollável no meio */
+  .ticket-header { flex-shrink: 0 }
+  .ticket-footer { flex-shrink: 0 }
 
   /* Cantos brilhantes */
   .ticket-corner {
     position: absolute;
-    width: 30px;
-    height: 30px;
+    width: 22px;
+    height: 22px;
     border: 2px solid var(--ciano);
-    box-shadow: 0 0 15px var(--ciano);
+    box-shadow: 0 0 12px var(--ciano);
     pointer-events: none;
   }
-  .ticket-corner.tl { top: 12px; left: 12px; border-right: 0; border-bottom: 0 }
-  .ticket-corner.tr { top: 12px; right: 12px; border-left: 0; border-bottom: 0 }
-  .ticket-corner.bl { bottom: 12px; left: 12px; border-right: 0; border-top: 0 }
-  .ticket-corner.br { bottom: 12px; right: 12px; border-left: 0; border-top: 0 }
+  .ticket-corner.tl { top: 8px; left: 8px; border-right: 0; border-bottom: 0 }
+  .ticket-corner.tr { top: 8px; right: 8px; border-left: 0; border-bottom: 0 }
+  .ticket-corner.bl { bottom: 8px; left: 8px; border-right: 0; border-top: 0 }
+  .ticket-corner.br { bottom: 8px; right: 8px; border-left: 0; border-top: 0 }
 
   /* Header */
   .ticket-header {
     text-align: center;
-    padding: 40px 30px 26px;
+    padding: 22px 24px 16px;
     background: linear-gradient(180deg, rgba(0, 212, 255, 0.08), transparent);
     border-bottom: 1px dashed var(--linha);
     position: relative;
   }
   .ticket-success-ic {
-    width: 80px;
-    height: 80px;
+    width: 52px;
+    height: 52px;
     background: linear-gradient(135deg, var(--verde), #16a34a);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 18px;
+    margin: 0 auto 10px;
     color: #fff;
-    box-shadow: 0 0 30px rgba(34, 197, 94, 0.5);
+    box-shadow: 0 0 22px rgba(34, 197, 94, 0.5);
     animation: successPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+  }
+  .ticket-success-ic svg {
+    width: 30px;
+    height: 30px;
   }
   @keyframes successPop {
     from { transform: scale(0); opacity: 0 }
@@ -1912,309 +2198,191 @@
   .ticket-jp {
     font-family: 'Yu Gothic', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
     color: var(--ciano);
-    font-size: 13px;
-    letter-spacing: 0.4em;
-    margin-bottom: 8px;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    margin-bottom: 4px;
     font-weight: 600;
   }
   .ticket-title-success {
     font-family: 'Georgia', serif;
-    font-size: 36px;
+    font-size: 24px;
     font-weight: 900;
     color: #fff;
     line-height: 1;
-    text-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+    text-shadow: 0 0 16px rgba(0, 212, 255, 0.4);
   }
   .ticket-sub {
-    margin-top: 10px;
-    color: var(--texto-2);
-    font-size: 14px;
-  }
-
-  /* Conteúdo principal: info + QR */
-  .ticket-content {
-    display: grid;
-    grid-template-columns: 1.5fr auto 1fr;
-    gap: 0;
-    align-items: stretch;
-  }
-
-  .ticket-info {
-    padding: 32px 36px;
-  }
-  .ticket-event-name {
-    font-family: 'Georgia', serif;
-    font-size: 26px;
-    font-weight: 900;
-    color: var(--ciano);
-    line-height: 1;
-    text-shadow: 0 0 14px rgba(0, 212, 255, 0.3);
-  }
-  .ticket-event-tagline {
-    font-family: 'Yu Gothic', 'Hiragino Sans', sans-serif;
-    color: var(--texto-2);
-    font-size: 11px;
-    letter-spacing: 0.2em;
     margin-top: 6px;
-    margin-bottom: 22px;
-    opacity: 0.7;
+    color: var(--texto-2);
+    font-size: 12px;
   }
 
-  .ticket-rows {
+  /* ============ CONVITE SECTION (área que rola dentro do modal) ============ */
+  .convite-section {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 0;
-  }
-  .ticket-row {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 11px 0;
-    border-bottom: 1px dashed rgba(0, 212, 255, 0.12);
-    gap: 16px;
   }
-  .ticket-row:last-child { border-bottom: 0 }
-  .ticket-row.highlight {
-    background: linear-gradient(90deg, rgba(0, 212, 255, 0.08), transparent);
-    padding: 11px 12px;
-    border-radius: 8px;
-    border: 1px solid var(--ciano);
-    margin-top: 6px;
-  }
-  .ticket-lb {
-    font-size: 10px;
-    color: var(--suave);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-  .ticket-vl {
-    font-size: 14px;
-    color: #fff;
-    font-weight: 600;
-    text-align: right;
-    word-break: break-word;
-  }
-  .ticket-row.highlight .ticket-vl {
-    color: var(--ciano);
-    font-weight: 800;
-  }
+  .convite-section::-webkit-scrollbar { width: 6px }
+  .convite-section::-webkit-scrollbar-thumb { background: var(--linha); border-radius: 3px }
 
-  .ticket-date {
-    margin-top: 22px;
-    padding: 14px 16px;
-    background: linear-gradient(135deg, var(--roxo-d), var(--bg-deep));
-    border-radius: 10px;
-    border: 1px solid rgba(108, 43, 217, 0.4);
+  /* ============ BRINDES SECTION ============ */
+  .brindes-section {
+    width: 100%;
+    padding: 20px 24px 26px;
+    border-top: 1px dashed var(--linha);
+    background: linear-gradient(180deg, transparent, rgba(108, 43, 217, 0.06));
   }
-  .ticket-date-day {
+  .brindes-header {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .brindes-tag {
+    display: inline-block;
+    font-size: 10px;
+    color: var(--ouro);
+    letter-spacing: 0.35em;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border: 1px solid var(--ouro);
+    border-radius: 4px;
+    background: rgba(240, 198, 116, 0.05);
+    margin-bottom: 10px;
+  }
+  .brindes-title {
     font-family: 'Georgia', serif;
     font-size: 22px;
     font-weight: 900;
-    color: var(--ouro);
-    text-shadow: 0 0 10px rgba(240, 198, 116, 0.3);
+    color: #fff;
+    line-height: 1;
+    text-shadow: 0 0 12px rgba(0, 212, 255, 0.3);
   }
-  .ticket-date-place {
-    font-size: 12px;
+  .brindes-title span {
+    background: linear-gradient(135deg, var(--ciano), var(--ouro));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .brindes-sub {
+    margin-top: 6px;
+    font-size: 11px;
     color: var(--texto-2);
-    margin-top: 2px;
+    letter-spacing: 0.05em;
   }
-
-  /* Perfuração entre info e QR */
-  .ticket-perforated {
-    width: 2px;
-    background-image: linear-gradient(180deg, transparent, var(--ciano) 50%, transparent);
-    background-size: 2px 12px;
-    background-repeat: repeat-y;
+  .brindes-img-wrap {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.04), rgba(108, 43, 217, 0.04));
+    border: 1px solid var(--linha);
+    border-radius: 12px;
+    padding: 18px;
     position: relative;
+    overflow: hidden;
   }
-  .ticket-perforated::before,
-  .ticket-perforated::after {
+  .brindes-img-wrap::before {
     content: "";
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 30px;
-    height: 30px;
-    background: var(--bg-deep);
-    border-radius: 50%;
-    border: 2px solid var(--ciano);
-    box-shadow: 0 0 12px var(--ciano);
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(0, 212, 255, 0.06), transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(240, 198, 116, 0.06), transparent 40%);
+    pointer-events: none;
   }
-  .ticket-perforated::before { top: -15px }
-  .ticket-perforated::after { bottom: -15px }
-
-  /* QR Area */
-  .ticket-qr-area {
-    padding: 32px 30px;
-    text-align: center;
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.04), transparent);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  .ticket-qr-label {
-    color: var(--ciano);
-    font-size: 11px;
-    letter-spacing: 0.3em;
-    font-weight: 800;
-    text-transform: uppercase;
-    margin-bottom: 14px;
-  }
-  .ticket-qr {
-    width: 180px;
-    height: 180px;
-    background: #fff;
-    border-radius: 14px;
-    padding: 12px;
-    box-shadow:
-      0 0 0 1px var(--ciano),
-      0 0 30px rgba(0, 212, 255, 0.4),
-      0 12px 30px rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .ticket-qr svg {
-    width: 100%;
-    height: 100%;
+  .brindes-img {
     display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.4));
   }
-  .ticket-qr-code {
-    margin-top: 12px;
-    font-family: 'Courier New', monospace;
-    font-size: 13px;
-    font-weight: 700;
+  .brindes-img-fallback {
+    text-align: center;
+    padding: 30px 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .brindes-img-fallback span {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .brindes-img-fallback strong {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: 18px;
     color: var(--ouro);
-    letter-spacing: 0.15em;
-    text-shadow: 0 0 8px rgba(240, 198, 116, 0.4);
+    margin-bottom: 6px;
   }
-  .ticket-qr-note {
-    font-size: 10px;
-    color: var(--suave);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-top: 8px;
+  .brindes-img-fallback small {
+    color: var(--texto-2);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+  }
+  .brindes-note {
+    margin-top: 14px;
+    padding: 10px 14px;
+    background: rgba(0, 212, 255, 0.05);
+    border-left: 3px solid var(--ciano);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    color: var(--texto-2);
+    line-height: 1.5;
+  }
+  .brindes-note-ic {
+    font-size: 18px;
+    flex-shrink: 0;
   }
 
-  /* Footer */
+  /* ============ FOOTER MODAL (botões) ============ */
   .ticket-footer {
-    padding: 22px 30px;
+    padding: 14px 22px 16px;
     border-top: 1px dashed var(--linha);
     background: linear-gradient(180deg, transparent, rgba(0, 212, 255, 0.04));
     display: flex;
-    gap: 14px;
+    gap: 12px;
     justify-content: center;
   }
   .ticket-footer .btn {
     flex: 1;
-    max-width: 220px;
-    padding: 14px 24px;
-    font-size: 12px;
+    max-width: 200px;
+    padding: 11px 20px;
+    font-size: 11px;
   }
 
   @media (max-width: 768px) {
-    .ticket-content {
-      grid-template-columns: 1fr;
-    }
-    .ticket-perforated {
-      width: 100%;
-      height: 2px;
-      background-image: linear-gradient(90deg, transparent, var(--ciano) 50%, transparent);
-      background-size: 12px 2px;
-      background-repeat: repeat-x;
-    }
-    .ticket-perforated::before,
-    .ticket-perforated::after {
-      top: 50%;
-      transform: translateY(-50%);
-      left: auto;
-    }
-    .ticket-perforated::before { left: -15px; right: auto }
-    .ticket-perforated::after { right: -15px; left: auto }
-    .ticket-info, .ticket-qr-area { padding: 24px }
     .ticket-footer { flex-direction: column }
     .ticket-footer .btn { max-width: none; width: 100% }
-    .ticket-title-success { font-size: 28px }
-  }
-
-
-
-  /* ============ TABS TICKET / CONVITE ============ */
-  .ticket-tabs {
-    display: flex;
-    gap: 4px;
-    padding: 0 30px;
-    margin-top: -2px;
-    border-bottom: 1px solid var(--linha);
-    background: linear-gradient(180deg, transparent, rgba(0, 212, 255, 0.03));
-  }
-  .ticket-tab {
-    flex: 1;
-    background: transparent;
-    border: 0;
-    color: var(--texto-2);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 16px 12px;
-    cursor: pointer;
-    border-bottom: 3px solid transparent;
-    transition: all 0.25s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-family: inherit;
-  }
-  .ticket-tab:hover {
-    color: var(--ciano);
-  }
-  .ticket-tab.active {
-    color: var(--ciano);
-    border-bottom-color: var(--ciano);
-    text-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
-    box-shadow: inset 0 -3px 0 var(--ciano), 0 4px 12px -8px var(--ciano);
-  }
-  .ticket-tab span {
-    font-size: 18px;
-  }
-  
-  /* Views: alterna entre Ticket e Convite */
-  .ticket-view {
-    display: none;
-    animation: viewFade 0.35s ease;
-  }
-  .ticket-view.active {
-    display: block;
-  }
-  @keyframes viewFade {
-    from { opacity: 0; transform: translateY(8px) }
-    to { opacity: 1; transform: translateY(0) }
+    .ticket-title-success { font-size: 22px }
+    .brindes-section { padding: 16px }
+    .brindes-title { font-size: 18px }
   }
 
   /* ============ CONVITE 9:16 ============ */
   .convite-wrap {
-    padding: 28px;
+    padding: 18px;
     display: flex;
     justify-content: center;
     background: radial-gradient(ellipse at center, rgba(108, 43, 217, 0.08), transparent 70%);
   }
   .convite-card {
-    width: 360px;
+    width: 300px;
     aspect-ratio: 9 / 16;
     background: var(--bg-deep);
     border: 1px solid var(--ciano);
-    border-radius: 18px;
+    border-radius: 14px;
     overflow: hidden;
     position: relative;
     box-shadow:
       0 0 0 1px rgba(0, 212, 255, 0.3),
-      0 0 40px rgba(0, 212, 255, 0.25),
-      0 30px 60px rgba(0, 0, 0, 0.6);
+      0 0 30px rgba(0, 212, 255, 0.2),
+      0 20px 40px rgba(0, 0, 0, 0.6);
   }
   /* Hero image (preenchida via JS) */
   .convite-hero {
@@ -2439,7 +2607,7 @@
   }
 
   /* Footer (tagline + hashtag) */
-  .convite-footer {
+  .convite-footer-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -2464,8 +2632,6 @@
   @media (max-width: 768px) {
     .convite-wrap { padding: 16px }
     .convite-card { width: 100%; max-width: 320px }
-    .ticket-tabs { padding: 0 16px }
-    .ticket-tab { padding: 14px 8px; font-size: 11px; letter-spacing: 0.1em }
   }
 
   /* ============ RESPONSIVO ============ */

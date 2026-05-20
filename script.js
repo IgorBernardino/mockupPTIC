@@ -36,11 +36,11 @@
   // Handler universal pra qualquer LINK/BOTÃO com data-page
   // (apenas elementos clicáveis nominais — não a <section> que ENVOLVE a página)
   document.addEventListener('click', (e) => {
-    // Procurar trigger entre elementos clicáveis (a, button, .nav-link, .drop-link, .nav-logo, .nav-cta, .pickup-card, .ticket-btn, .quick-card)
+    // Procurar trigger entre elementos clicáveis (a, button, .nav-link, .nav-logo, .nav-cta, .ticket-btn)
     const trigger = e.target.closest(
-      'a[data-page], button[data-page], .nav-link[data-page], .drop-link[data-page], ' +
-      '.nav-logo[data-page], .nav-cta[data-page], .pickup-card[data-page], ' +
-      '.ticket-btn[data-page], .quick-card[data-page], .footer-col a[data-page]'
+      'a[data-page], button[data-page], .nav-link[data-page], ' +
+      '.nav-logo[data-page], .nav-cta[data-page], ' +
+      '.ticket-btn[data-page], .footer-col a[data-page]'
     );
     if (!trigger) return;
     e.preventDefault();
@@ -72,9 +72,12 @@
   // Marvel/DC e tipo-row handlers movidos pra dentro do form (com validação)
 
   // ========== TICKET / VIP BUTTONS ==========
+  // Botões de compra de ingresso (na página Ingressos) levam pro cadastro.
+  // Botões com data-page próprio (ex: na seção Status da Home) ficam de fora —
+  // a navegação normal do handler universal já cuida disso.
   document.addEventListener('click', (e) => {
     const ticketBtn = e.target.closest('.ticket-btn');
-    if (ticketBtn){
+    if (ticketBtn && !ticketBtn.hasAttribute('data-page')){
       const card = ticketBtn.closest('.ticket-card');
       const name = card?.querySelector('.ticket-name')?.textContent || 'Ingresso';
       showToast('🎫 ' + name + ' selecionado!');
@@ -135,18 +138,6 @@
     dots.forEach((d, i) => d.addEventListener('click', () => goToSlide(i)));
     resetAutoSlide();
   }
-
-  // ========== LANG SWITCHER (placeholder) ==========
-  document.querySelectorAll('.lang-link').forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      document.querySelectorAll('.lang-link').forEach(l => l.classList.remove('active'));
-      link.classList.add('active');
-      showToast('Idioma: ' + link.textContent + ' (em breve)');
-    });
-  });
-
-
 
   // ========================================================
   // QR CODE VISUAL (gerador determinístico baseado em hash)
@@ -459,40 +450,18 @@
       date: '2026-11-15'
     });
     
-    // Gerar QR Code SVG (visual, baseado em hash)
-    const qrContainer = document.getElementById('qrCode');
-    if (qrContainer) {
-      try {
-        const svg = gerarQRSVG(qrPayload, 25);
-        qrContainer.innerHTML = svg;
-        console.log('✓ QR Code gerado com sucesso (' + svg.length + ' chars)');
-      } catch (err) {
-        console.error('❌ Erro ao gerar QR:', err);
-        qrContainer.innerHTML = '<div style="color:#dc2626;padding:20px;text-align:center;font-size:11px;font-family:monospace">QR error: ' + err.message + '</div>';
-      }
-    } else {
-      console.warn('⚠ Container #qrCode não encontrado');
-    }
-    
-    // Mini QR no convite
+    // Gerar Mini QR no convite (único QR agora)
     const conviteQR = document.getElementById('conviteQR');
     if (conviteQR) {
       try {
         const svg = gerarQRSVG(qrPayload, 21);
         conviteQR.innerHTML = svg;
+        console.log('✓ QR Code do convite gerado (' + svg.length + ' chars)');
       } catch (err) {
         console.error('❌ Erro ao gerar QR do convite:', err);
+        conviteQR.innerHTML = '<div style="color:#dc2626;font-size:9px;text-align:center;padding:8px">QR err</div>';
       }
     }
-    
-    // Preencher dados do ticket
-    document.getElementById('rNome').textContent = dados.nome;
-    document.getElementById('rEmail').textContent = dados.email;
-    document.getElementById('rTel').textContent = dados.telefone;
-    document.getElementById('rIg').textContent = dados.instagram;
-    document.getElementById('rUniverso').textContent = dados.universo;
-    document.getElementById('rTipo').textContent = dados.tipo;
-    document.getElementById('qrCodeId').textContent = hunterId;
     
     // === POPULAR O CONVITE ===
     popularConvite(dados, hunterId);
@@ -510,8 +479,7 @@
     
     showToast('✓ Hunter ID gerado: ' + hunterId);
     
-    // Guardar pra download
-    window.__ticketData = dados;
+    // Guardar pro download
     window.__hunterId = hunterId;
   }
 
@@ -522,22 +490,22 @@
   // IMPORTANTE: trocar 'images/gamernato.jpg' pelo arquivo que você quiser pra cada tipo
   const CONVITE_CONFIG = {
     'Visitante': {
-      imagem: 'images/gamernato.jpg',
+      imagem: 'imagem/jjk.png',
       tagText: '★ VISITANTE',
       tagClass: ''  // ciano (default)
     },
     'Concurso Cosplay': {
-      imagem: 'images/gamernato.jpg',
+      imagem: 'images/berserk.png',
       tagText: '★ COMPETIDOR',
       tagClass: 'gold'
     },
     'Cospobre': {
-      imagem: 'images/gamernato.jpg',
+      imagem: 'images/solo.png',
       tagText: '★ COSPOBRE',
       tagClass: 'purple'
     },
     'Expositor': {
-      imagem: 'images/gamernato.jpg',
+      imagem: 'images/solo.png',
       tagText: '★ EXPOSITOR',
       tagClass: 'red'
     }
@@ -582,8 +550,6 @@
       ticketModal.classList.add('show');
       document.body.style.overflow = 'hidden';
       if (navbar) navbar.style.zIndex = '1';  // rebaixa navbar
-      // Resetar pra aba "ticket" sempre que abrir
-      switchTab('ticket');
     }
     function closeModal() {
       ticketModal.classList.remove('show');
@@ -597,39 +563,18 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && ticketModal.classList.contains('show')) closeModal();
     });
-
-    // ========== TABS Ticket/Convite ==========
-    function switchTab(tabName) {
-      document.querySelectorAll('.ticket-tab').forEach(t => {
-        t.classList.toggle('active', t.dataset.tab === tabName);
-      });
-      document.querySelectorAll('.ticket-view').forEach(v => {
-        v.classList.toggle('active', v.dataset.view === tabName);
-      });
-      // Atualizar label do botão download
-      const downloadLabel = document.getElementById('downloadLabel');
-      if (downloadLabel) {
-        downloadLabel.textContent = tabName === 'convite' ? 'Baixar Convite' : 'Baixar Ticket';
-      }
-      window.__currentTab = tabName;
-    }
-    window.__currentTab = 'ticket';
-    document.querySelectorAll('.ticket-tab').forEach(tab => {
-      tab.addEventListener('click', () => switchTab(tab.dataset.tab));
-    });
   }
   
-  // Download do ticket (gera PNG do card)
+  // Download do convite (gera SVG do QR pra escanear)
   document.getElementById('ticketDownload')?.addEventListener('click', async () => {
-    // Estratégia simples: baixar SVG do QR pra usuário ter o que escanear
-    const qrSvg = document.querySelector('#qrCode svg');
+    const qrSvg = document.querySelector('#conviteQR svg');
     if (qrSvg) {
       const svgData = new XMLSerializer().serializeToString(qrSvg);
       const blob = new Blob([svgData], { type: 'image/svg+xml' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `CosplayCon-${window.__hunterId || 'ticket'}.svg`;
+      a.download = `CosplayCon-${window.__hunterId || 'convite'}.svg`;
       a.click();
       URL.revokeObjectURL(url);
       showToast('✓ QR Code baixado!');
