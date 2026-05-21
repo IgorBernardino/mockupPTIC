@@ -2224,7 +2224,10 @@
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
+  }
+  .convite-section > * {
+    width: 100%;
+    flex-shrink: 0;
   }
   .convite-section::-webkit-scrollbar { width: 6px }
   .convite-section::-webkit-scrollbar-thumb { background: var(--linha); border-radius: 3px }
@@ -2366,13 +2369,17 @@
 
   /* ============ CONVITE 9:16 ============ */
   .convite-wrap {
+    width: 100%;
     padding: 18px;
     display: flex;
     justify-content: center;
     background: radial-gradient(ellipse at center, rgba(108, 43, 217, 0.08), transparent 70%);
+    box-sizing: border-box;
   }
   .convite-card {
     width: 300px;
+    max-width: 100%;
+    flex-shrink: 0;
     aspect-ratio: 9 / 16;
     background: var(--bg-deep);
     border: 1px solid var(--ciano);

@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
 </head>
 <body>
 
@@ -588,25 +589,7 @@
         </div>
 
         <div class="aftermovie-meta">
-          <div class="meta-it">
-            <span class="meta-ic">🎬</span>
-            <div>
-              <div class="meta-lb">Duração</div>
-              <div class="meta-vl">~3 min</div>
-            </div>
-          </div>
-          <div class="meta-it">
-            <span class="meta-ic">📅</span>
-            <div>
-              <div class="meta-lb">Gravado em</div>
-              <div class="meta-vl">15 &amp; 16 Nov</div>
-            </div>
-          </div>
-          <div class="meta-it">
-            <span class="meta-ic">🎵</span>
-            <div>
-              <div class="meta-lb">Trilha</div>
-              <div class="meta-vl">Original</div>
+            </div>          
             </div>
           </div>
         </div>
@@ -977,7 +960,7 @@
         <div class="convite-section">
           <div class="convite-wrap">
             <!-- O convite tem formato 9:16 estilo story -->
-            <div class="convite-card">
+            <div class="convite-card" id="conviteCard">
               <!-- Imagem hero (será preenchida via JS de acordo com o tipo) -->
               <div class="convite-hero" id="conviteHero"></div>
               <div class="convite-hero-overlay"></div>

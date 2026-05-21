@@ -490,22 +490,22 @@
   // IMPORTANTE: trocar 'images/gamernato.jpg' pelo arquivo que você quiser pra cada tipo
   const CONVITE_CONFIG = {
     'Visitante': {
-      imagem: 'imagem/jjk.png',
+      imagem: 'images/berserk.jpg',
       tagText: '★ VISITANTE',
       tagClass: ''  // ciano (default)
     },
     'Concurso Cosplay': {
-      imagem: 'images/berserk.png',
+      imagem: 'images/jjk.jpg',
       tagText: '★ COMPETIDOR',
       tagClass: 'gold'
     },
     'Cospobre': {
-      imagem: 'images/solo.png',
+      imagem: 'images/solo.jpg',
       tagText: '★ COSPOBRE',
       tagClass: 'purple'
     },
     'Expositor': {
-      imagem: 'images/solo.png',
+      imagem: 'images/solo.jpg',
       tagText: '★ EXPOSITOR',
       tagClass: 'red'
     }
@@ -565,19 +565,72 @@
     });
   }
   
-  // Download do convite (gera SVG do QR pra escanear)
+  // Download do convite — gera PNG com a imagem do convite inteiro
+  // Usa html2canvas pra capturar o card como imagem
   document.getElementById('ticketDownload')?.addEventListener('click', async () => {
-    const qrSvg = document.querySelector('#conviteQR svg');
-    if (qrSvg) {
-      const svgData = new XMLSerializer().serializeToString(qrSvg);
-      const blob = new Blob([svgData], { type: 'image/svg+xml' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `CosplayCon-${window.__hunterId || 'convite'}.svg`;
-      a.click();
-      URL.revokeObjectURL(url);
-      showToast('✓ QR Code baixado!');
+    const card = document.getElementById('conviteCard');
+    if (!card) {
+      showToast('⚠ Convite não encontrado');
+      return;
+    }
+
+    // Verificar se a lib carregou
+    if (typeof html2canvas !== 'function') {
+      showToast('⚠ Aguarde, gerador de imagem carregando...');
+      console.warn('html2canvas ainda não carregou. Tentando download alternativo (SVG do QR).');
+      // Fallback: baixar SVG do QR Code
+      const qrSvg = document.querySelector('#conviteQR svg');
+      if (qrSvg) {
+        const svgData = new XMLSerializer().serializeToString(qrSvg);
+        const blob = new Blob([svgData], { type: 'image/svg+xml' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `CosplayCon-${window.__hunterId || 'convite'}.svg`;
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+      return;
+    }
+
+    // Feedback imediato
+    const btn = document.getElementById('ticketDownload');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '⏳ Gerando imagem...';
+    btn.disabled = true;
+    showToast('⏳ Gerando imagem do convite...');
+
+    try {
+      // html2canvas opções pra máxima qualidade
+      const canvas = await html2canvas(card, {
+        backgroundColor: '#050510',     // fundo deep do site
+        scale: 2,                        // 2x pra alta resolução
+        useCORS: true,                   // permitir imagens cross-origin
+        allowTaint: false,
+        logging: false,
+        imageTimeout: 5000,
+      });
+
+      // Converter canvas pra blob e baixar
+      canvas.toBlob((blob) => {
+        if (!blob) {
+          throw new Error('Falha ao gerar blob da imagem');
+        }
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `CosplayCon-Convite-${window.__hunterId || 'convite'}.png`;
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('✓ Convite baixado!');
+      }, 'image/png', 1.0);
+
+    } catch (err) {
+      console.error('Erro ao gerar imagem do convite:', err);
+      showToast('❌ Erro ao gerar imagem. Tente novamente.');
+    } finally {
+      btn.innerHTML = originalText;
+      btn.disabled = false;
     }
   });
 
